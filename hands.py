@@ -5,6 +5,7 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 #https://omes-va.com/mediapipe-hands-python/
 #https://google.github.io/mediapipe/solutions/hands#python-solution-api
+#https://techtutorialsx.com/2021/04/10/python-hand-landmark-estimation/
 
 # For webcam input:
 cap = cv2.VideoCapture(0)
