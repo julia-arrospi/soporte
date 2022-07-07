@@ -38,15 +38,17 @@ with mp_hands.Hands(
             mp_hands.HAND_CONNECTIONS,
             mp_drawing_styles.get_default_hand_landmarks_style(),
             mp_drawing_styles.get_default_hand_connections_style())
+        ''' print("hand landmark")
+        print(hand_landmarks) '''
         
-        for point in mp_hands.HandLandmark:
-            
-            normalizedLandmark = mp_hands.landmark[point]
-            x1 = int(normalizedLandmark.x * width)
-            y1 = int(normalizedLandmark.y * height)
-            print(x1)
-            if(x1 <= 150):
-                cv2.putText(image, "Adentro", (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 1, cv2.LINE_AA)
+        for point in mp_hands.HandLandmark: 	
+          normalizedLandmark = hand_landmarks.landmark[point]
+              
+        
+        x1 = int(normalizedLandmark.x * width)
+        y1 = int(normalizedLandmark.y * height)
+        if(x1 <= 150):
+          cv2.putText(image, "Adentro", (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 1, cv2.LINE_AA)
 
     cv2.imshow('MediaPipe Hands', image)
     if cv2.waitKey(5) & 0xFF == 27:
