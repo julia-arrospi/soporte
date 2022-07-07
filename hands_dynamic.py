@@ -6,6 +6,10 @@ mp_hands = mp.solutions.hands
 #https://omes-va.com/mediapipe-hands-python/
 #https://google.github.io/mediapipe/solutions/hands#python-solution-api
 #https://techtutorialsx.com/2021/04/10/python-hand-landmark-estimation/
+#De este último copiamos
+
+#https://blog.electroica.com/select-roi-or-multiple-rois-bounding-box-in-opencv-python/
+
 
 # For webcam input:
 cap = cv2.VideoCapture(0)
@@ -45,14 +49,18 @@ with mp_hands.Hands(
           normalizedLandmark = hand_landmarks.landmark[point]
           x1 = int(normalizedLandmark.x * width)
           y1 = int(normalizedLandmark.y * height)
-          if(x1 <= 150 and y1 <= 150):
-            cv2.putText(image, "Adentro", (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 1, cv2.LINE_AA)
+          #aca abrir video con la mano capturada
+          image2 = image
+          h = 150
+          w = 150
+          (y_min = 0) if y1-h <= 0 else (y_min = y1-h)
+          y_max = y1+h
+          
+          
+          sub_image = image2[y1-h:y1+h, x1-w:x1+w]
+          cv2.imshow('image2', sub_image)
+          #cv2.putText(image, "Adentro", (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 1, cv2.LINE_AA)
 
-    start_point = (0, 0)
-    end_point = (150, 150)
-    color = (255, 0, 0)
-    thickness = 2
-    image = cv2.rectangle(image, start_point, end_point, color, thickness)
     cv2.imshow('MediaPipe Hands', image)
     if cv2.waitKey(5) & 0xFF == 27:
       break
