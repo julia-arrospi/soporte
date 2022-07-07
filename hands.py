@@ -43,13 +43,16 @@ with mp_hands.Hands(
         
         for point in mp_hands.HandLandmark: 	
           normalizedLandmark = hand_landmarks.landmark[point]
-              
-        
-        x1 = int(normalizedLandmark.x * width)
-        y1 = int(normalizedLandmark.y * height)
-        if(x1 <= 150):
-          cv2.putText(image, "Adentro", (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 1, cv2.LINE_AA)
+          x1 = int(normalizedLandmark.x * width)
+          y1 = int(normalizedLandmark.y * height)
+          if(x1 <= 150 and y1 <= 150):
+            cv2.putText(image, "Adentro", (7, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 0, 0), 1, cv2.LINE_AA)
 
+    start_point = (0, 0)
+    end_point = (150, 150)
+    color = (255, 0, 0)
+    thickness = 2
+    image = cv2.rectangle(image, start_point, end_point, color, thickness)
     cv2.imshow('MediaPipe Hands', image)
     if cv2.waitKey(5) & 0xFF == 27:
       break
